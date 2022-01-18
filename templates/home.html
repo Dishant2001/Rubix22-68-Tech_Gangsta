@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4f9d14f6b3.js" crossorigin="anonymous"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/styling.css') }}">
+</head>
+
+<body>
+    <div id="home">
+        <div class="header">
+            <div class="time">
+            </div>
+            <div class="connect">
+            </div>
+        </div>
+        <nav>
+            <div id="logo">
+            </div>
+            <div id="navbar">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About </a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#threshold">Threshold</a>
+                        <ul>
+                            <form id='threshold' >
+                                <label>Change your Threshold</label>
+                                <input type="text" id="threshold" name="threshold" placeholder="Threshold" style="margin: 0 10px ;">
+                                <button style="float: right; margin: 0;">Change</button>
+                            </form>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="intro">
+            <h3 class="green">WE ARE READY TO HELP YOU</h3>
+            <h1>CASHFLOW</h1>
+            <p>We are just one click away from providing your overall
+                spend analysis and a distinct vision towards transparency of your transactions.</p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+    <div id="contact">
+        <div id="contact_head">
+            <h1 style="letter-spacing: 0.7px;">Upload image or screenshot of <span class="green">a Bill</span></h1>
+            <br>
+            <p style="font-size: 16px;letter-spacing: 0.7px;">LET'S ANALYSE</p>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            
+            <div class="item">
+                <label for="inputFile">Any image (only pdf/png/jpg is allowed): </label>
+                <input type="file" name="img">
+            </div>
+            <button style="font-size: 16px;letter-spacing: 0.7px" type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div id="stats">
+        <div id="stats_intro">
+            <h5 style="margin-bottom: 10px;">ANALYSIS</h5>
+            <h3 style="line-height: normal; font-size: 40px;">Current<span class="green"> Expenditure</span></h3>
+            <br>
+            <img src="https://eltecenglish.files.wordpress.com/2017/07/screen-shot-2017-07-09-at-2-29-42-pm.png" alt="">
+            <button> READ MORE </button>
+        </div>
+        <div id="stats_grid">
+            <div class="stats_item">
+                <h1 style="color: #c80616;">45%</h1>
+                <h3>Food Expenses</h3>
+            </div>
+            <div class="stats_item">
+                <h1 style="color: #00C100;">10%</h1>
+                <h3>Travelling</h3>
+            </div>
+            <div class="stats_item">
+                <h1 style="color: #c80616">20%</h1>
+                <h3>Clothing</h3>
+            </div>
+            <div class="stats_item">
+                <h1 style="color: #00C100;">5%</h1>
+                <h3>Groceries</h3>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <div id="services">
+        <div id="serintro">
+            <h1>Our <span>TEAM</span></h1>
+            <br>
+            <p>Alone, we can do so little; together, we can do so much.</p>
+        </div>
+        <div id="grid">
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/dishant.png')}}" alt="Dishant">
+                <a href="https://www.linkedin.com/in/dishant-182b651a5/"><h3>Dishant Kumar</h3></a>
+                
+                <button>READ MORE</button>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/kaveya.jpeg')}}" alt="">
+                <h3>Kaveya Sivaprakasam</h3>
+                
+                <a href="https://www.linkedin.com/in/sivakaveya/"><button>READ MORE</button></a>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/utkarsh.jpeg')}}" alt="">
+                <h3>Utkarsh Salvi</h3>
+                
+                <a href="https://www.linkedin.com/in/utkarsh-salvi-2a4b5a1b7/"><button>READ MORE</button></a>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/tuba.jpg')}}" alt="">
+                <h3>Tuba Momin</h3>
+                
+                <a href="https://www.linkedin.com/in/tuba-momin-80b0571bb/"><button>READ MORE</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="copy">
+        <p>Copyright &copy 2022 CashFlow Rubbix Co., Ltd  </p>
+    </div>
+    <script>
+        {% if logged==1 %}
+        window.alert("Logged in Successfully!")
+        {% endif %}
+        
+    </script>
+</body>
+
+</html>
