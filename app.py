@@ -23,6 +23,22 @@ class User(db.Model):
         self.password=password
         self.income=income
         self.phoneNo=phoneNo
+
+class Budget(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50))
+    food = db.Column(db.Integer)
+    rent = db.Column(db.Integer)
+    life = db.Column(db.Integer)
+    others = db.Column(db.Integer)
+    
+
+    def __init__(self, email, food, rent, life, others):
+        self.email=email
+        self.food=food
+        self.rent=rent
+        self.life=life
+        self.others=others
         
 
 @app.route("/", methods = ["GET", "POST"])
@@ -34,12 +50,12 @@ def index():
 def signup():
     if request.method == 'POST':
         print("im in post")
-        name = request.form['name']
-        income = request.form['income']
-        email = request.form['email']
-        password = request.form['password']
-        conpass = request.form['conpass']
-        phoneNo = request.form['phoneNo']
+        name = request.form.get('name')
+        income = request.form.get('income')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        conpass = request.form.get('conpass')
+        phoneNo = request.form.get('phoneNo')
         print(name, email, password, phoneNo, income)
         users = User.query.all()
         for user in users:
@@ -49,13 +65,12 @@ def signup():
                     
             except:
                 return "There is an error"
-        if conpass==password:
-            new_entry=User(name=name, email=email, password=password, income=income, phoneNo=phoneNo)
-            db.session.add(new_entry)
-            db.session.commit()
-            return render_template("login.html")
-        else:
-            return render_template("signup.html", password=1, email=0, user_exist=0)
+        
+        new_entry=User(name=name, email=email, password=password, income=income, phoneNo=phoneNo)
+        db.session.add(new_entry)
+        db.session.commit()
+        return render_template("login.html")
+        
     else:
         return render_template("signup.html", password=0, email=0, user_exist=0)
 
@@ -73,6 +88,8 @@ def login():
             if email == user.email: 
                 if password == user.password:
                     session['name'] = user.name
+                    session['email'] = user.email
+                    session['income'] = user.income
                     return render_template("home.html",logged=1)
                 
                 else:
@@ -88,6 +105,30 @@ def login():
 def home():
     if 'name' in session:
         return render_template("home.html", logged=0)
+    else:
+        return render_template("index.html")
+
+@app.route("/budget", methods = ["GET", "POST"])
+def budget():
+    if 'name' in session:
+        if request.method == 'POST':
+            email=session['email']
+            food=request.form['food']
+            rent=request.form['rent']
+            life=request.form['life']
+            others=request.form['others']
+            # print(email, food, rent, life, others)
+            exist_data = Budget.query.filter_by(email=email).first()
+            exist_data.food=food
+            exist_data.rent=rent
+            exist_data.life=life
+            exist_data.others=others
+            db.session.commit()
+            data = Budget.query.filter_by(email=email).first()
+            return render_template("budget.html", income=session['income'], data=data)
+        else:
+            data = Budget.query.filter_by(email=session['email']).first()
+            return render_template("budget.html", income=session['income'], data=data)
     else:
         return render_template("index.html")
 

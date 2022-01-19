@@ -391,26 +391,6 @@ nav{
     font-size: 17px;
 }
 
-#review_item #stats_grid .stats_item{
-    width: 220px;
-    height: 110px;
-    background-color: rgba(256,256,256,0.15);
-    text-align: center;
-    padding-top: 24px;
-    margin: 10px;
-}
-#review_item #stats_grid{
-    margin: 70px 0px;
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-evenly;
-}
-#review_item #stats_grid .stats_item h1{
-    color: #8cdd2f;
-    margin-bottom: 10px;
-}
-
-
 .slider {
     -webkit-appearance: none;
     width: 100%;

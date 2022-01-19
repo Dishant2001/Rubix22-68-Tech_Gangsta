@@ -81,7 +81,7 @@
             font-size: larger
         }
     </style>
-    
+
     <form style="border:1px solid #ccc" name="signup" id="signup" action="/signup" method="POST" novalidate>
         <div class="container">
             <style>
@@ -110,7 +110,7 @@
                     </style>
                     <!-- name, email, password, phoneNo) -->
                     <td>Full Name</td>
-                    <td><input type="text" name="name" placeholder="Your name.."></td>
+                    <td><input type="text" name="name" placeholder="Your name.." id='name'></td>
                 </tr>
 
 
@@ -118,7 +118,8 @@
                     <td>Approximate Income</td>
                     <td>
                         <div class="slidecontainer">
-                            <input type="range" min="0" max="500000" value="0" class="slider" id="myRange" step="5000" name='income'>
+                            <input type="range" min="0" max="500000" value="0" class="slider" id="myRange" step="5000"
+                                name='income' id='income'>
                             <p>Value : Rs <span id="demo"></span></p>
                         </div>
 
@@ -139,23 +140,23 @@
                     <b>
                         <td>Email id</td>
                     </b>
-                    <td><input type="text" placeholder="Enter Email" name="email" required>
+                    <td><input type="text" placeholder="Enter Email" name="email" required id='email'>
                 </tr>
                 </td>
 
                 <tr>
                     <td><b>Password</td></b>
-                    <td><input type="password" placeholder="Enter Password" name="password" required></td>
+                    <td><input type="password" placeholder="Enter Password" name="password" required id='password'></td>
                 </tr>
 
                 <tr>
                     <td><b>Confirm Password</td></b>
-                    <td><input type="password" placeholder="Confirm Password" name="conpass" required></td>
+                    <td><input type="password" placeholder="Confirm Password" name="conpass" required id='conpass'></td>
                 </tr>
 
                 <tr>
                     <td>Contact Number</td>
-                    <td><input type="integer" placeholder="10 digit number" name="phoneNo" required></td>
+                    <td><input type="integer" placeholder="10 digit number" name="phoneNo" required id='phoneNo'></td>
                 </tr>
 
                 <tr>
@@ -182,7 +183,8 @@
                                     min-height: 50px;
                                     min-width: 120px;
                                 }
-                                button:hover{
+
+                                button:hover {
                                     color: white;
                                     border: 3px solid white;
                                 }
@@ -195,17 +197,30 @@
         </div>
     </form>
     <script>
-        {% if password==1 %}
-            window.alert("Passwords Don't Match")
+        {% if password == 1 %}
+        window.alert("Passwords Don't Match")
         {% endif %}
-        {% if email==1 %}
-            window.alert("User with same email id exists")
+        {% if email == 1 %}
+        window.alert("User with same email id exists")
         {% endif %}
-        {% if user_exist==1 %}
+        {% if user_exist == 1 %}
         window.alert("User doesnt exist!")
         {% endif %}
-       
+
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $(document).on('submit', function (e) {
+            console.log('hello');
+            if ($("#password").val() != $("#conpass").val()){
+                e.preventDefault();
+                window.alert("Password don't match!")
+            }
+            
+        });
+    </script>
+  
 </body>
 
 </html>
