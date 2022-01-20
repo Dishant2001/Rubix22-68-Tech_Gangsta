@@ -78,7 +78,7 @@
             </div>
             <div id="navbar">
                 <ul>
-                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="/home" class="active">Home</a></li>
                     <li><a href="#about">About </a></li>
                     <li><a href="#services">Our Services</a></li>
                     <li><a href="#contact">Contact Us</a></li>
@@ -144,27 +144,30 @@
                     <div class="stats_item">
                         <input type="range" min="0" max="100" value={{data.food}} class="slider" id="food"
                             onChange="refreshPiechart();" style="background-color: #FFAC28;" name="food">
-                        <h3>Food Expenses: <span id="foodValue"> </span> %</h3>
+                        <h3 id="f">Food Expenses: <span id="foodValue"> </span> %</h3>
                     </div>
                     <div class="stats_item">
                         <input type="range" min="0" max="100" value={{data.rent}} class="slider" id="rent"
                             onChange="refreshPiechart();" style="background-color: #0252AE;" name="rent">
-                        <h3>Rent and EMI: <span id="rentValue"> </span> %</h3>
+                        <h3 id='r' style="color: black;">Rent and EMI: <span id="rentValue"> </span> %</h3>
                     </div>
                     <div class="stats_item">
                         <input type="range" min="0" max="100" value={{data.life}} class="slider" id="life"
                             onChange="refreshPiechart();" style="background-color: #C1212E;" name="life">
-                        <h3>Lifestyle: <span id="lifeValue"> </span> %</h3>
+                        <h3 id='l'>Lifestyle: <span id="lifeValue"> </span> %</h3>
                     </div>
                     <div class="stats_item">
                         <input type="range" min="0" max="100" value={{data.others}} class="slider" id="others"
                             onChange="refreshPiechart();" style="background-color: #1E384A;" name="others">
-                        <h3>Others: <span id="othersValue"> </span> %</h3>
+                        <h3 id='o'>Others: <span id="othersValue"> </span> %</h3>
                     </div>
                 </div>
                 <h2 class="green" style="font-weight: bold;">Savings: <span id="savingValue"> </span> %</h2>
                 <button type="submit" class="signupbtn" value="budget" name="Budget">Save</button>
                 <style>
+                    .red{
+                        color:#C1212E
+                    }
                     button {
                         flex-direction: row-reverse;
                         width: 10vw;
@@ -232,7 +235,13 @@
     <!-- <script src="{{url_for('static', filename= 'js/budget.js') }}">
     </script> -->
 
-
+    <script>
+        tf={{food}}
+        tr={{rent}}
+        tl={{life}}
+        tO={{others}}
+        console.log(tf,tr,tl,tO)
+    </script>
 
 
     <script>
@@ -300,12 +309,41 @@
         outputOthers.innerHTML = sliderOthers.value; // Display the default slider value
         othersDisplay.innerHTML = income * sliderOthers.value / 100
 
+
+        
         // Update the current slider value (each time you drag the slider handle)
         sliderOthers.oninput = function () {
             outputOthers.innerHTML = this.value;
             othersDisplay.innerHTML = income * this.value / 100
         };
+        console.log(parseInt(foodDisplay.innerHTML))
+        if (parseInt(foodDisplay.innerHTML)>=tf){
+            document.getElementById('f').style.color = "green";
+        }
+        else{
+            document.getElementById('f').style.color = "red";
+        }
 
+        if (parseInt(rentDisplay.innerHTML)>=tr){
+            document.getElementById('r').style.color = "green";
+        }
+        else{
+            document.getElementById('r').style.color = "red";
+        }
+
+        if (parseInt(lifeDisplay.innerHTML)>=tl){
+            document.getElementById('l').style.color = "green";
+        }
+        else{
+            document.getElementById('l').style.color = "red";
+        }
+        
+        if (parseInt(othersDisplay.innerHTML)>=tO){
+            document.getElementById('o').style.color = "green";
+        }
+        else{
+            document.getElementById('o').style.color = "red";
+        }
 
 
 
